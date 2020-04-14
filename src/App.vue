@@ -33,12 +33,15 @@ export default {
   components: {},
   data() {
     return {
-      active: 1
+      active: 1,
+      all_routers: ['/','/tag','stastic']
     }
   },
   methods: {
     change_active(which) {
       this.active = which
+      // 跳转到相应的page
+       this.$router.push({ path: this.all_routers[which-1] })
     }
   }
 }
