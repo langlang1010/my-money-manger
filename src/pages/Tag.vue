@@ -8,12 +8,10 @@
         @click="bianji(index)"
       >{{item}}</b-list-group-item>
     </b-list-group>
-    <div style="display:flex;justify-content:center;">
-      <b-button variant="outline-primary">新增标签</b-button>
-      <br>
-    
+    <div style="display:flex;justify-content:center">
+      <b-button variant="outline-primary" @click="click">新增标签</b-button>
     </div>
-    
+
     <!-- <h1>tags:{{tags}}</h1>
     -->
   </div>
@@ -23,13 +21,23 @@
 export default {
   data() {
     return {
-      list: [1,2,3,4,5,6,7,8,9,7,9,8,9,8,9,8,9,9,8]
+      list: ["衣", "食", "住", "行"]
     };
   },
- 
+  mounted() {
+    this.list = window.localStorage.tags;
+  },
   methods: {
     bianji(index) {
       alert(index);
+    },
+    click() {
+      var message = prompt("请输入标签");
+      if (message) {
+        this.list.push(message);
+        window.localStorage.tags = this.list;
+        //console.log(window.localStorage.tags)
+      }
     }
   }
   //computed:{
@@ -40,15 +48,14 @@ export default {
 };
 </script>
 
-<style >
-.tagstyle{
-  
-  padding-bottom:60px;
-  overflow-y:scroll ;
-
-  
-  
-  
+<style scoped >
+.tagstyle {
+  padding-bottom: 60px;
+  overflow-y: scroll;
 }
-
+#inputstyle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 </style>

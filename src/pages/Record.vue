@@ -3,6 +3,9 @@
     <div>
      <!--<b-form-tags input-id="tags-basic" v-model="tag"  class="mb-2" size="lg"></b-form-tags>-->
       <!-- <p>Value: {{ value }}</p> -->
+      <ul v-for="(item,index) of list" :key="index" style=" overflow-y:scroll ">
+        <li>{{item}}</li>
+      </ul>
     </div>
     <div>
       <b-form-input v-model="text" placeholder="备注" ></b-form-input>
@@ -48,16 +51,15 @@ export default {
       income: "",
       outcome: "",
       text: "",
+      list:''
       
      
     };
   },
-  watch: {
-    // 监听tags
-    tag: function() {
-       window.localStorage.tags=this.tag;
-    }
-  },
+ mounted(){
+   this.list=window.localStorage.tags;
+  // alert(window.localstorage["tags"]);
+ },
   methods: {
    // change() {
     //  const v = this.text;
