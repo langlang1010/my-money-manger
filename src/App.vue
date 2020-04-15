@@ -9,7 +9,7 @@
         <template v-else> <b-icon icon="plus-circle"></b-icon></template>
         <br /><small>记账</small>
       </b-nav-item>
-      <b-nav-item @click="change_active(1)">
+      <b-nav-item  @click="change_active(1)">
         <template v-if="active === 1">
           <b-icon icon="tag-fill"></b-icon>
         </template>
@@ -50,6 +50,7 @@ export default {
     const name = this.$router.currentRoute.name.toLowerCase()
     var routerName =  ['record', 'tag', 'stastic']
     this.active = routerName.indexOf(name)
+    document.querySelector(".fixed-bottom").scrollIntoView()
   }
 }
 </script>
@@ -57,10 +58,10 @@ export default {
 <style>
 .fixed-bottom {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1030;
+bottom:0; 
+
+
+ 
 }
 .text-center {
   text-align: center;
@@ -71,4 +72,5 @@ export default {
   font-size: 2em;
   vertical-align: middle;
 }
+
 </style>

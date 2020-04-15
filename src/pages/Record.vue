@@ -1,39 +1,23 @@
 <template>
-  <div id="record">
+  <div   class="record" >
     <div>
-      <b-form-tags input-id="tags-basic" v-model="tag" class="mb-2" size="lg"></b-form-tags>
+     <!--<b-form-tags input-id="tags-basic" v-model="tag"  class="mb-2" size="lg"></b-form-tags>-->
       <!-- <p>Value: {{ value }}</p> -->
     </div>
     <div>
       <b-form-input v-model="text" placeholder="备注" ></b-form-input>
     </div>
     <div>
-      <b-card no-body>
-        <b-tabs pills card justified>
-          <b-tab title="支出" active>
-            <div>
-              <b-card class="input-num">
-                <b-card-text>
-                  <b-badge style="float:left" variant="light">支出</b-badge>
-                  {{ input_num }}
-                </b-card-text>
-              </b-card>
-            </div>
-          </b-tab>
-          <b-tab title="收入">
-            <div>
-              <b-card class="input-num">
-                <b-card-text>
-                  <b-badge style="float:left" variant="light">收入</b-badge>
-                  {{ input_num }}
-                </b-card-text>
-              </b-card>
-            </div>
-          </b-tab>
-        </b-tabs>
-      </b-card>
-
       <div>
+  <b-tabs content-class="mt-3" justified>
+    <b-tab title="收入" active><p style="text-align:right">{{input_num}}</p></b-tab>
+    <b-tab title="支出"><p style="text-align:right">{{input_num}}</p></b-tab>
+   
+  </b-tabs>
+</div>
+     
+    </div>
+      <div >
         <b-button @click="input(1)" squared class="num-button" variant="secondary">1</b-button>
         <b-button @click="input(2)" squared class="num-button" variant="secondary">2</b-button>
         <b-button @click="input(3)" squared class="num-button" variant="secondary">3</b-button>
@@ -48,7 +32,7 @@
         <b-button @click="pushmoney()" squared class="num-button-ok" variant="secondary">OK</b-button>
         <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
         <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
-      </div>
+      
     </div>
     <!-- 显示输入的数字 -->
   </div>
@@ -60,20 +44,26 @@ export default {
     return {
       input_num: "0",
       point: false,
-      tag: ["衣", "食", "住", "行"],
+      tag: ['衣', '食','住','行'],
       income: "",
       outcome: "",
-      text: ""
+      text: "",
+      
+     
     };
   },
-  mounted(){
-    window.localStorage.tags=this.tag;
+  watch: {
+    // 监听tags
+    tag: function() {
+       window.localStorage.tags=this.tag;
+    }
   },
   methods: {
    // change() {
     //  const v = this.text;
     //  this.$store.commit("setTagNew", v);
    // },
+    
     input(num) {
       // 如果是刚开始输入
       if (this.input_num === "0") {
@@ -82,6 +72,8 @@ export default {
         this.input_num += num;
       }
     },
+   
+  
     // 点击小数点时
     add_point() {
       // 如果没有点过小数点
@@ -124,13 +116,14 @@ export default {
 </script>
 
 <style>
-#record {
-  position: fixed;
+.record{
+   position: fixed;
   right: 0;
-  bottom: 80px;
+  bottom: 60px;
   left: 0;
   z-index: 1030;
 }
+
 .num-button {
   width: 25%;
   height: 64px;
@@ -149,4 +142,5 @@ export default {
 .input-num {
   text-align: right;
 }
+
 </style>
