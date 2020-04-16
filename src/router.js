@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Record from './pages/Record.vue'
 import Tag from './pages/Tag.vue'
-
+import Edit from './pages/Edit.vue'
 import Stastic from './pages/Stastic.vue'
 
 
@@ -22,6 +22,10 @@ export default new Router({
       path: '/stastic',
       name: 'Stastic',
       component: Stastic
+    },{
+      path: '/edit',
+      name: 'Edit',
+      component: Edit
     }
   ]
 })

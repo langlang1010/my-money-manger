@@ -1,10 +1,10 @@
 <template>
   <div   class="record" >
-    <div>
+    <div style=" overflow-y:scroll" >
      <!--<b-form-tags input-id="tags-basic" v-model="tag"  class="mb-2" size="lg"></b-form-tags>-->
       <!-- <p>Value: {{ value }}</p> -->
-      <ul v-for="(item,index) of list" :key="index" style=" overflow-y:scroll ">
-        <li>{{item}}</li>
+      <ul v-for="(item,index) of list" :key="index" class="ulstyle">
+        <li class="biaostyle">{{item}}</li>
       </ul>
     </div>
     <div>
@@ -57,8 +57,8 @@ export default {
     };
   },
  mounted(){
-   this.list=window.localStorage.tags;
-  // alert(window.localstorage["tags"]);
+   this.list=JSON.parse(localStorage.getItem('tags'));
+  
  },
   methods: {
    // change() {
@@ -144,5 +144,22 @@ export default {
 .input-num {
   text-align: right;
 }
+.biaostyle{
+  background-color: #D4D1D1;
+  border: 2rem;
+  border-radius: 5rem;
+  
+  align-items:flex-start;
 
+}
+.ulstyle{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap:nowrap;
+  display:inline-block;
+   list-style:none; 
+   
+
+}
 </style>

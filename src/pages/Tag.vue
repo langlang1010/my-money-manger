@@ -18,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -25,17 +26,20 @@ export default {
     };
   },
   mounted() {
-    this.list = window.localStorage.tags;
+    this.list = JSON.parse(localStorage.getItem('tags'));
   },
   methods: {
     bianji(index) {
-      alert(index);
+       this.$router.push({path:'/edit',query:{id:index}});
+
+     
     },
     click() {
       var message = prompt("请输入标签");
       if (message) {
         this.list.push(message);
-        window.localStorage.tags = this.list;
+        window.localStorage.setItem('tags',JSON.stringify(this.list)) 
+      
         //console.log(window.localStorage.tags)
       }
     }
