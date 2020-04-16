@@ -1,10 +1,10 @@
 <template>
   <div>
     <p style="width:100%;text-align:center;height:50px; background-color: rgb(141, 141, 141);">编辑标签</p>
-    <p>{{editmessage}}</p>
+     <b-form-input  v-model="editmessage"></b-form-input>
     <div style="display:flex;justify-content:space-around">
       <b-button variant="danger" @click="demessage">删除</b-button>
-      <b-button variant="success">确认</b-button>
+      <b-button variant="success" @click="postmessage">确认</b-button>
     </div>
   </div>
 </template>
@@ -30,7 +30,18 @@ export default {
       alert("删除"+this.editmessage+"成功");
       this.$router.push({path:'/tag'});
 
+    },
+    postmessage(){
+     // alert(this.editmessage)
+      var key = this.$route.query.id;
+      var message = JSON.parse(localStorage.getItem("tags"));
+       message.splice(key, 1,this.editmessage);
+       window.localStorage.setItem('tags',JSON.stringify(message));
+       alert("添加"+this.editmessage+"成功");
+        this.$router.push({path:'/tag'});
+
     }
+    
   }
 };
 </script>
