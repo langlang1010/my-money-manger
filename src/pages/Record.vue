@@ -103,13 +103,24 @@ export default {
     }
   },
   mounted() {
-    var list = JSON.parse(localStorage.getItem('tags'))
+    var tags = localStorage.getItem('tags')
+    var list = null
+    // 如果 localStorage 不存在tags
+    if(tags === undefined || tags === null) {
+      list = this.tag
+      window.localStorage.tags = JSON.stringify(list)
+    } else {
+      list = JSON.parse(tags)
+    }
+
     var length = list.length
     for (var i = 0; i < length; ++i) {
+      var temp = list[i]
       list[i] = {
         isactive: true, // 代表初始样式
         isactive2: false,
-        content: JSON.parse(localStorage.getItem('tags'))[i],
+        // content: JSON.parse(localStorage.getItem('tags'))[i],
+        content: temp
       }
     }
     this.list = list
