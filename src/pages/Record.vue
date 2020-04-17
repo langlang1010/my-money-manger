@@ -180,18 +180,20 @@ export default {
 
       if (this.tab_in === true) {
         // 如果第一次记账
-        var incomeArray = []
-        if (window.localStorage.income === undefined) {
+      
+        var incomeArray =[]
+        if (window.localStorage.inmoney === undefined) {
           incomeArray = [json]
-          window.localStorage.income = JSON.stringify(incomeArray)
+          window.localStorage.inmoney = JSON.stringify(incomeArray)
         } else {
           // 添加到后面
-          incomeArray = JSON.parse(window.localStorage.income)
+          incomeArray = JSON.parse(window.localStorage.inmoney)
           incomeArray.push(json)
-          window.localStorage.income = JSON.stringify(incomeArray)
+          window.localStorage.inmoney = JSON.stringify(incomeArray)
         }
-        alert(window.localStorage.income)
-
+         
+        alert(window.localStorage.inmoney)
+       
         this.choosetag = []
       } else {
         // 如果第一次记账
