@@ -1,13 +1,7 @@
 <template>
-  <div>
+  <div class="stastic">
     <b-tabs content-class="mt-3" justified>
       <b-tab title="支出" active>
-        <!-- <div v-for="(item,index) of outtags" :key="index" style="background-color: rgb(232, 232, 232);margin-bottom:20px">
-          <p>{{item.odate}}</p>
-          <p style="display:inline-block">{{item.otags}}</p>
-          <p style="display:inline-block">{{item.oremark}}</p>
-          <span style="float:right;color:red">-{{item.omoney}}</span>
-        </div>-->
         <b-list-group>
           <template v-for="(item,index) of output">
             <b-list-group-item
@@ -23,10 +17,13 @@
               :key="index2"
               class="d-flex justify-content-between align-items-center"
             >
-            
-             <small> {{aryToString(item2.tags)}}</small>
+              <small>
+                {{aryToString(item2.tags)}}
+                <span class="text-muted">{{item2.note}}</span>
+              </small>
               <b-badge variant="primary" pill>
-                <small>-{{item2.money}}</small></b-badge> 
+                <small>-{{item2.money}}</small>
+              </b-badge>
             </b-list-group-item>
           </template>
         </b-list-group>
@@ -48,8 +45,13 @@
               :key="index2"
               class="d-flex justify-content-between align-items-center"
             >
-              <small>{{aryToString(item2.tags)}}</small>
-              <b-badge variant="primary" pill><small>+{{item2.money}}</small></b-badge>
+              <small>
+                {{aryToString(item2.tags)}}
+                <span class="text-muted">{{item2.note}}</span>
+              </small>
+              <b-badge variant="primary" pill>
+                <small>+{{item2.money}}</small>
+              </b-badge>
             </b-list-group-item>
           </template>
         </b-list-group>
@@ -69,28 +71,6 @@ export default {
     };
   },
   mounted() {
-    // var ot = {};
-    // var iny = {};
-    // var length = JSON.parse(window.localStorage.output).length;
-    // var length2 = JSON.parse(window.localStorage.inmoney).length;
-    // for (var i = 0; i < length; i++) {
-    //   ot[i] = {
-    //     otags: JSON.parse(window.localStorage.output)[i].tags,
-    //     omoney: JSON.parse(window.localStorage.output)[i].money,
-    //     oremark: JSON.parse(window.localStorage.output)[i].remark,
-    //     odate: JSON.parse(window.localStorage.output)[i].date
-    //   };
-    //   this.outtags.push(ot[i]);
-    // }
-    // for (var j = 0; j < length2; j++) {
-    //   iny[j] = {
-    //     inta: JSON.parse(window.localStorage.inmoney)[j].tags,
-    //     inmo: JSON.parse(window.localStorage.inmoney)[j].money,
-    //     inremark: JSON.parse(window.localStorage.inmoney)[j].remark,
-    //     indate: JSON.parse(window.localStorage.inmoney)[j].date
-    //   };
-    //   this.intags.push(iny[j]);
-    // }
     var income = window.localStorage.inmoney;
     var output = window.localStorage.output;
     // 检查是否为空
@@ -126,6 +106,7 @@ export default {
       var info = {};
       info.tags = data[0].tags;
       info.money = data[0].money;
+      info.note = data[0].remark;
       oneDayJSON.sum += parseFloat(info.money);
       oneDayJSON.infoAry.push(info);
 
@@ -136,6 +117,7 @@ export default {
           var another = {};
           another.tags = data[i].tags;
           another.money = data[i].money;
+          another.note = data[i].remark;
           oneDayJSON.sum += parseFloat(another.money);
           oneDayJSON.infoAry.push(another);
         } else {
@@ -152,6 +134,7 @@ export default {
           var infoTemp = {};
           infoTemp.tags = data[i].tags;
           infoTemp.money = data[i].money;
+          infoTemp.note = data[i].remark;
           oneDayJSON.sum += parseFloat(infoTemp.money);
           oneDayJSON.infoAry.push(infoTemp);
         }
@@ -160,20 +143,23 @@ export default {
       return result;
     },
     aryToString(ary) {
-      if(ary === undefined || ary === null || ary.length === 0) {
-        return '未添加标签'
+      if (ary === undefined || ary === null || ary.length === 0) {
+        return "未添加标签";
       }
-      var result = ""
-      for(var i=0; i<ary.length-1; i++) {
-          result += ary[i]
-          result += ','
+      var result = "";
+      for (var i = 0; i < ary.length - 1; i++) {
+        result += ary[i];
+        result += ",";
       }
-      result += ary[ary.length-1]
-      return result
+      result += ary[ary.length - 1];
+      return result;
     }
   }
 };
 </script>
 
 <style scoped>
+.stastic {
+  padding-bottom: 120px;
+}
 </style>

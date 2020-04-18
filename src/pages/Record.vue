@@ -1,8 +1,6 @@
 <template>
   <div class="record">
     <div style=" overflow-y:scroll">
-      <!--<b-form-tags input-id="tags-basic" v-model="tag"  class="mb-2" size="lg"></b-form-tags>-->
-      <!-- <p>Value: {{ value }}</p> -->
       <ul v-for="(item, index) of list" :key="index" class="ulstyle">
         <li
           @click="everytag(item)"
@@ -41,7 +39,23 @@
       <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
       <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
     </div>
-    <!-- 显示输入的数字 -->
+    <!-- <b-nav justified class="fixed-bottom">
+      <b-nav-item>
+        <b-icon icon="plus-circle-fill"></b-icon>
+        <br />
+        <small>记账</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/tag'})">
+        <b-icon icon="tag"></b-icon>
+        <br />
+        <small>标签</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/stastic'})">
+        <b-icon icon="bar-chart"></b-icon>
+        <br />
+        <small>统计</small>
+      </b-nav-item>
+    </b-nav> -->
   </div>
 </template>
 
@@ -77,23 +91,12 @@ export default {
       list[i] = {
         isactive: true, // 代表初始样式
         isactive2: false,
-        // content: JSON.parse(localStorage.getItem('tags'))[i],
         content: temp
       };
     }
     this.list = list;
   },
   methods: {
-    // change() {
-    //  const v = this.text;
-    //  this.$store.commit("setTagNew", v);
-    // },
-    // tab1() {
-    //   this.tab_in = true
-    // },
-    // tab2() {
-    //   this.tab_out = true
-    // },
     input(num) {
       // 如果是刚开始输入
       if (this.input_num === "0") {
@@ -154,7 +157,7 @@ export default {
       json.date = this.dateFormat("YYYY-mm-dd", date);
       // window.localStorage.income.clear()
 
-      if (this.tab_in === true&&this.input_num !== "0") {
+      if (this.tab_in === true && this.input_num !== "0") {
         // 如果第一次记账
 
         var incomeArray = [];
@@ -171,7 +174,7 @@ export default {
         alert(window.localStorage.inmoney);
 
         this.choosetag = [];
-      } else if (this.tab_in === false&&this.input_num !== "0") {
+      } else if (this.tab_in === false && this.input_num !== "0") {
         // 如果第一次记账
         var outputArray = [];
         if (window.localStorage.output === undefined) {

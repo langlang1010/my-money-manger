@@ -1,5 +1,6 @@
 <template>
-  <div style="overflow-y:scroll" class="tagstyle">
+<div>
+  <div  class="tagstyle">
     <b-list-group>
       <b-list-group-item
         button
@@ -8,17 +9,15 @@
         @click="bianji(index)"
       >{{item}}</b-list-group-item>
     </b-list-group>
-    <div style="display:flex;justify-content:center">
+    <div style="display:flex;justify-content:center;">
       <b-button variant="outline-primary" @click="click">新增标签</b-button>
     </div>
-
-    <!-- <h1>tags:{{tags}}</h1>
-    -->
   </div>
+ 
+</div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -26,20 +25,18 @@ export default {
     };
   },
   mounted() {
-    this.list = JSON.parse(localStorage.getItem('tags'));
+    this.list = JSON.parse(localStorage.getItem("tags"));
   },
   methods: {
     bianji(index) {
-       this.$router.push({path:'/edit',query:{id:index}});
-
-     
+      this.$router.push({ path: "/edit", query: { id: index } });
     },
     click() {
       var message = prompt("请输入标签");
       if (message) {
         this.list.push(message);
-        window.localStorage.setItem('tags',JSON.stringify(this.list)) 
-      
+        window.localStorage.setItem("tags", JSON.stringify(this.list));
+
         //console.log(window.localStorage.tags)
       }
     }
@@ -54,8 +51,7 @@ export default {
 
 <style scoped >
 .tagstyle {
-  padding-bottom: 60px;
-  overflow-y: scroll;
+  padding-bottom: 120px;
 }
 #inputstyle {
   display: flex;
