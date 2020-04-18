@@ -36,16 +36,10 @@ export default {
       if (message) {
         this.list.push(message);
         window.localStorage.setItem("tags", JSON.stringify(this.list));
-
-        //console.log(window.localStorage.tags)
+        window.scrollTo(9999999, 9999999)
       }
     }
   }
-  //computed:{
-  //  tags(){
-  //    return this.$store.state.tags;
-  //   }
-  // }
 };
 </script>
 

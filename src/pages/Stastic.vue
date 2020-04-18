@@ -63,9 +63,6 @@
 export default {
   data() {
     return {
-      // outtags: [],
-      // datenew: [],
-      // intags: []
       income: [],
       output: []
     };
@@ -79,7 +76,6 @@ export default {
     } else {
       var tempIncome = JSON.parse(income);
       this.income = this.merge(tempIncome);
-      // alert(this.income.length);
     }
     if (output === undefined || output === null) {
       this.output = null;

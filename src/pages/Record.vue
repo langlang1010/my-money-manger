@@ -1,6 +1,15 @@
 <template>
   <div class="record">
-    <div style=" overflow-y:scroll">
+    <b-alert
+      class="successAlert"
+      :show="dismissCountDown"
+      dismissible
+      variant="success"
+      @dismissed="dismissCountDown=0"
+      @dismiss-count-down="countDownChanged"
+    >记账成功</b-alert>
+
+    <div style="overflow-y:scroll;height:200px;padding-top:3px;">
       <ul v-for="(item, index) of list" :key="index" class="ulstyle">
         <li
           @click="everytag(item)"
@@ -39,23 +48,6 @@
       <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
       <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
     </div>
-    <!-- <b-nav justified class="fixed-bottom">
-      <b-nav-item>
-        <b-icon icon="plus-circle-fill"></b-icon>
-        <br />
-        <small>记账</small>
-      </b-nav-item>
-      <b-nav-item @click="$router.push({ path: '/tag'})">
-        <b-icon icon="tag"></b-icon>
-        <br />
-        <small>标签</small>
-      </b-nav-item>
-      <b-nav-item @click="$router.push({ path: '/stastic'})">
-        <b-icon icon="bar-chart"></b-icon>
-        <br />
-        <small>统计</small>
-      </b-nav-item>
-    </b-nav> -->
   </div>
 </template>
 
@@ -71,7 +63,10 @@ export default {
       text: "",
       list: "",
       tab_in: false,
-      choosetag: []
+      choosetag: [],
+      // 记账成功后b-alert时间
+      dismissSecs: 3,
+      dismissCountDown: 0
     };
   },
   mounted() {
@@ -114,7 +109,6 @@ export default {
         this.input_num += ".";
       }
     },
-
     // 清空
     clear() {
       this.input_num = "0";
@@ -128,6 +122,14 @@ export default {
       }
       this.input_num = this.input_num.substr(0, this.input_num.length - 1);
     },
+    // 用于b-alert success
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
+    },
+
     pushmoney() {
       var pointlast = this.input_num.indexOf(".");
       var length = this.input_num.length;
@@ -136,6 +138,7 @@ export default {
       if (plength > 2 && pointlast !== -1) {
         alert("输入金额不对");
         this.input_num = "0";
+        return;
       } else {
         this.income = parseFloat(this.input_num);
         this.point = false;
@@ -145,7 +148,8 @@ export default {
       var listlength = this.list.length;
       for (var j = 0; j < listlength; j++) {
         this.list[j].isactive = true;
-        location.reload();
+        this.list[j].isactive2 = false;
+        // location.reload();
       }
 
       // 读取数据并转换成json格式
@@ -159,7 +163,6 @@ export default {
 
       if (this.tab_in === true && this.input_num !== "0") {
         // 如果第一次记账
-
         var incomeArray = [];
         if (window.localStorage.inmoney === undefined) {
           incomeArray = [json];
@@ -170,8 +173,6 @@ export default {
           incomeArray.push(json);
           window.localStorage.inmoney = JSON.stringify(incomeArray);
         }
-
-        alert(window.localStorage.inmoney);
 
         this.choosetag = [];
       } else if (this.tab_in === false && this.input_num !== "0") {
@@ -186,10 +187,10 @@ export default {
           outputArray.push(json);
           window.localStorage.output = JSON.stringify(outputArray);
         }
-        alert(window.localStorage.output);
       }
       this.input_num = "0";
       this.choosetag = [];
+      this.showAlert();
     },
 
     everytag(item) {
@@ -201,7 +202,6 @@ export default {
       } else if (item.isactive2 === false) {
         this.choosetag.pop(item.content);
       }
-      console.log(this.choosetag);
     },
     dateFormat(fmt, date) {
       let ret;
@@ -212,7 +212,6 @@ export default {
         "H+": date.getHours().toString(), // 时
         "M+": date.getMinutes().toString(), // 分
         "S+": date.getSeconds().toString() // 秒
-        // 有其他格式化字符需求可以继续添加，必须转化成字符串
       };
       for (let k in opt) {
         ret = new RegExp("(" + k + ")").exec(fmt);
@@ -234,10 +233,12 @@ export default {
   position: fixed;
   right: 0;
   bottom: 60px;
+  top: auto;
   left: 0;
   z-index: 1030;
 }
-
+.successAlert {
+}
 .num-button {
   width: 25%;
   height: 64px;
