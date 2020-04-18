@@ -23,8 +23,10 @@
               :key="index2"
               class="d-flex justify-content-between align-items-center"
             >
-              {{item2.tags}}
-              <b-badge variant="primary" pill>{{item2.money}}</b-badge>
+            
+             <small> {{aryToString(item2.tags)}}</small>
+              <b-badge variant="primary" pill>
+                <small>-{{item2.money}}</small></b-badge> 
             </b-list-group-item>
           </template>
         </b-list-group>
@@ -46,8 +48,8 @@
               :key="index2"
               class="d-flex justify-content-between align-items-center"
             >
-              {{item2.tags}}
-              <b-badge variant="primary" pill>{{item2.money}}</b-badge>
+              <small>{{aryToString(item2.tags)}}</small>
+              <b-badge variant="primary" pill><small>+{{item2.money}}</small></b-badge>
             </b-list-group-item>
           </template>
         </b-list-group>
@@ -96,20 +98,14 @@ export default {
       this.income = null;
     } else {
       var tempIncome = JSON.parse(income);
-      // alert(output)
-      // this.output = JSON.stringify(this.merge(tempOutput))
       this.income = this.merge(tempIncome);
-      alert(this.income.length);
+      // alert(this.income.length);
     }
     if (output === undefined || output === null) {
       this.output = null;
     } else {
       var tempOutput = JSON.parse(output);
-      // alert(output)
-      // this.output = JSON.stringify(this.merge(tempOutput))
       this.output = this.merge(tempOutput);
-
-      // alert(this.output.length);
     }
   },
   methods: {
@@ -117,7 +113,6 @@ export default {
      * 根据天合并数据
      * 这里假设 data 是已经按照日期排好顺序的数组
      */
-
     merge(data) {
       var result = [];
       // 1. 获得第一天的日期，把第一条数据写入
@@ -163,6 +158,18 @@ export default {
       }
       result.push(oneDayJSON);
       return result;
+    },
+    aryToString(ary) {
+      if(ary === undefined || ary === null || ary.length === 0) {
+        return '未添加标签'
+      }
+      var result = ""
+      for(var i=0; i<ary.length-1; i++) {
+          result += ary[i]
+          result += ','
+      }
+      result += ary[ary.length-1]
+      return result
     }
   }
 };
