@@ -10,7 +10,7 @@
               class="d-flex justify-content-between align-items-center"
             >
               {{item.date}}
-              <b-badge variant="light">{{item.sum}}</b-badge>
+              <b-badge variant="light">-{{item.sum}}</b-badge>
             </b-list-group-item>
             <b-list-group-item
               v-for="(item2,index2) of item.infoAry"
@@ -38,7 +38,7 @@
               class="d-flex justify-content-between align-items-center"
             >
               {{item.date}}
-              <b-badge variant="light">{{item.sum}}</b-badge>
+              <b-badge variant="light">+{{item.sum}}</b-badge>
             </b-list-group-item>
             <b-list-group-item
               v-for="(item2,index2) of item.infoAry"
@@ -49,7 +49,7 @@
                 {{aryToString(item2.tags)}}
                 <span class="text-muted">{{item2.note}}</span>
               </small>
-              <b-badge variant="primary" pill>
+              <b-badge variant="primary" pill style="background-color:green">
                 <small>+{{item2.money}}</small>
               </b-badge>
             </b-list-group-item>
