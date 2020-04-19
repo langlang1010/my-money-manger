@@ -1,5 +1,5 @@
 <template>
-  <div class="record">
+  <div class="record" id="record">
     <b-alert
       class="successAlert"
       :show="dismissCountDown"
@@ -9,7 +9,7 @@
       @dismiss-count-down="countDownChanged"
     >记账成功</b-alert>
 
-    <div style="overflow-y:scroll;">
+    <div>
       <ul v-for="(item, index) of list" :key="index" class="ulstyle">
         <li
           @click="everytag(item)"
@@ -48,6 +48,23 @@
       <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
       <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
     </div>
+    <b-nav justified class="bg-light">
+      <b-nav-item>
+        <b-icon icon="plus-circle-fill"></b-icon>
+        <br />
+        <small>记账</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/tag' })">
+        <b-icon icon="tag"></b-icon>
+        <br />
+        <small>标签</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/stastic' })">
+        <b-icon icon="bar-chart"></b-icon>
+        <br />
+        <small>统计</small>
+      </b-nav-item>
+    </b-nav>
   </div>
 </template>
 
@@ -69,6 +86,7 @@ export default {
       dismissCountDown: 0
     };
   },
+  
   mounted() {
     var tags = localStorage.getItem("tags");
     var list = null;
@@ -90,7 +108,10 @@ export default {
       };
     }
     this.list = list;
+    
+    window.scrollTo(0,400)
   },
+
   methods: {
     input(num) {
       // 如果是刚开始输入
@@ -148,8 +169,7 @@ export default {
       var listlength = this.list.length;
       for (var j = 0; j < listlength; j++) {
         this.list[j].isactive = true;
-        this.list[j].isactive2 = false;
-        // location.reload();
+        this.list[j].isactive2 = false
       }
 
       // 读取数据并转换成json格式
@@ -203,6 +223,7 @@ export default {
         this.choosetag.pop(item.content);
       }
     },
+    // 日期格式转换
     dateFormat(fmt, date) {
       let ret;
       const opt = {
@@ -230,15 +251,16 @@ export default {
 
 <style>
 .record {
-  position: fixed;
+  /* position: fixed;
   right: 0;
   bottom: 60px;
   top: auto;
   left: 0;
-  z-index: 1030;
+  z-index: 1030; */
+  /* overflow-y: scroll; */
+  padding-top: 100px;
 }
-.successAlert {
-}
+
 .num-button {
   width: 25%;
   height: 64px;

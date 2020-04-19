@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-view />
-    <b-nav justified class="fixed-bottom bg-light" >
+    <!-- <b-nav justified class="fixed-bottom bg-light" >
       <b-nav-item @click="change_active(0)">
         <template v-if="active === 0">
           <b-icon icon="plus-circle-fill"></b-icon>
@@ -32,35 +32,13 @@
         <br />
         <small>统计</small>
       </b-nav-item>
-    </b-nav>
+    </b-nav> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  components: {},
-  data() {
-    return {
-      active: 0,
-      all_routers: ["/", "/tag", "/stastic"]
-    };
-  },
-  methods: {
-    // 切换active
-    change_active(which) {
-      this.active = which;
-      // 跳转到相应的page
-      this.$router.push({ path: this.all_routers[which] });
-    }
-  },
-  mounted() {
-    // 根据当前的路由来确定active
-    const name = this.$router.currentRoute.name.toLowerCase();
-    var routerName = ["record", "tag", "stastic"];
-    this.active = routerName.indexOf(name);
-    document.querySelector(".fixed-bottom").scrollIntoView();
-  }
+  name: "App"
 };
 </script>
 

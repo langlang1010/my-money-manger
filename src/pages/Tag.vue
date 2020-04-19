@@ -13,7 +13,23 @@
       <b-button variant="outline-primary" @click="click">新增标签</b-button>
     </div>
   </div>
- 
+  <b-nav justified class="fixed-bottom bg-light" >
+      <b-nav-item  @click="$router.push({ path: '/' })"> 
+          <b-icon icon="plus-circle"></b-icon>
+        <br />
+        <small>记账</small>
+      </b-nav-item>
+      <b-nav-item >
+          <b-icon icon="tag-fill"></b-icon>
+        <br />
+        <small>标签</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/stastic' })">
+          <b-icon icon="bar-chart"></b-icon>
+        <br />
+        <small>统计</small>
+      </b-nav-item>
+    </b-nav>
 </div>
 </template>
 
@@ -36,6 +52,7 @@ export default {
       if (message) {
         this.list.push(message);
         window.localStorage.setItem("tags", JSON.stringify(this.list));
+        // 滑轮滑到底部
         window.scrollTo(9999999, 9999999)
       }
     }

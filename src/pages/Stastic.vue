@@ -57,6 +57,23 @@
         </b-list-group>
       </b-tab>
     </b-tabs>
+    <b-nav justified class="fixed-bottom bg-light" >
+      <b-nav-item  @click="$router.push({ path: '/' })"> 
+          <b-icon icon="plus-circle"></b-icon>
+        <br />
+        <small>记账</small>
+      </b-nav-item>
+      <b-nav-item @click="$router.push({ path: '/tag' })">
+          <b-icon icon="tag"></b-icon>
+        <br />
+        <small>标签</small>
+      </b-nav-item>
+      <b-nav-item>
+          <b-icon icon="bar-chart-fill"></b-icon>
+        <br />
+        <small>统计</small>
+      </b-nav-item>
+    </b-nav>
   </div>
 </template>
 <script>
