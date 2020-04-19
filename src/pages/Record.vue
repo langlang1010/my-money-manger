@@ -24,10 +24,10 @@
       <div>
         <b-tabs content-class="mt-3" justified>
           <b-tab title="支出" @click="tab_in = false" active>
-            <p style="text-align:right">{{ input_num }}</p>
+          <div>   <b-icon icon="wallet"></b-icon> <span  style="float:right">{{ input_num }}</span> </div>
           </b-tab>
           <b-tab title="收入" @click="tab_in = true">
-            <p style="text-align:right">{{ input_num }}</p>
+           <div>   <b-icon icon="wallet"></b-icon> <span  style="float:right">{{ input_num }}</span> </div>
           </b-tab>
         </b-tabs>
       </div>

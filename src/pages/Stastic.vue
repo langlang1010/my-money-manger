@@ -10,7 +10,7 @@
               class="d-flex justify-content-between align-items-center"
             >
               {{item.date}}
-              <b-badge variant="light">-{{item.sum}}</b-badge>
+              <b-badge variant="light">-￥{{item.sum}}</b-badge>
             </b-list-group-item>
             <b-list-group-item
               v-for="(item2,index2) of item.infoAry"
@@ -38,7 +38,7 @@
               class="d-flex justify-content-between align-items-center"
             >
               {{item.date}}
-              <b-badge variant="light">+{{item.sum}}</b-badge>
+              <b-badge variant="light">+￥{{item.sum}}</b-badge>
             </b-list-group-item>
             <b-list-group-item
               v-for="(item2,index2) of item.infoAry"
