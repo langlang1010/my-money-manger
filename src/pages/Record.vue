@@ -160,6 +160,9 @@ export default {
     },
 
     pushmoney() {
+      if(this.input_num === "0") {
+        return
+      }
       var pointlast = this.input_num.indexOf(".");
       var length = this.input_num.length;
       var result = this.input_num.substr(pointlast + 1, length);

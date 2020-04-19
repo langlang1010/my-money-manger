@@ -93,12 +93,14 @@ export default {
     } else {
       var tempIncome = JSON.parse(income);
       this.income = this.merge(tempIncome);
+      this.income = this.income.reverse()
     }
     if (output === undefined || output === null) {
       this.output = null;
     } else {
       var tempOutput = JSON.parse(output);
       this.output = this.merge(tempOutput);
+      this.output = this.output.reverse()
     }
   },
   methods: {
