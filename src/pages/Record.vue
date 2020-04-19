@@ -1,54 +1,62 @@
 <template>
-  <div class="record" id="record">
-    <b-alert
-      class="successAlert"
-      :show="dismissCountDown"
-      dismissible
-      variant="success"
-      @dismissed="dismissCountDown=0"
-      @dismiss-count-down="countDownChanged"
-    >记账成功</b-alert>
+  <div>
+    <div class="record" id="record">
+      <b-alert
+        class="successAlert"
+        :show="dismissCountDown"
+        dismissible
+        variant="success"
+        @dismissed="dismissCountDown=0"
+        @dismiss-count-down="countDownChanged"
+      >记账成功</b-alert>
 
-    <div>
-      <ul v-for="(item, index) of list" :key="index" class="ulstyle">
-        <li
-          @click="everytag(item)"
-          :class="{ biaostyle: item.isactive, biaotwostyle: item.isactive2 }"
-        >{{ item.content }}</li>
-      </ul>
-    </div>
-    <div>
-      <b-form-input v-model="text" placeholder="备注"></b-form-input>
-    </div>
-    <div>
       <div>
-        <b-tabs content-class="mt-3" justified>
-          <b-tab title="支出" @click="tab_in = false" active>
-          <div>   <b-icon icon="wallet"></b-icon> <span  style="float:right">{{ input_num }}</span> </div>
-          </b-tab>
-          <b-tab title="收入" @click="tab_in = true">
-           <div>   <b-icon icon="wallet"></b-icon> <span  style="float:right">{{ input_num }}</span> </div>
-          </b-tab>
-        </b-tabs>
+        <ul v-for="(item, index) of list" :key="index" class="ulstyle">
+          <li
+            @click="everytag(item)"
+            :class="{ biaostyle: item.isactive, biaotwostyle: item.isactive2 }"
+          >{{ item.content }}</li>
+        </ul>
+      </div>
+      <div>
+        <b-form-input v-model="text" placeholder="备注"></b-form-input>
+      </div>
+      <div>
+        <div>
+          <b-tabs content-class="mt-3" justified>
+            <b-tab title="支出" @click="tab_in = false" active>
+              <div>
+                <b-icon icon="wallet"></b-icon>
+                <span style="float:right">{{ input_num }}</span>
+              </div>
+            </b-tab>
+            <b-tab title="收入" @click="tab_in = true">
+              <div>
+                <b-icon icon="wallet"></b-icon>
+                <span style="float:right">{{ input_num }}</span>
+              </div>
+            </b-tab>
+          </b-tabs>
+        </div>
+      </div>
+      <div>
+        <b-button @click="input(1)" squared class="num-button" variant="secondary">1</b-button>
+        <b-button @click="input(2)" squared class="num-button" variant="secondary">2</b-button>
+        <b-button @click="input(3)" squared class="num-button" variant="secondary">3</b-button>
+        <b-button @click="del()" squared class="num-button" variant="secondary">删除</b-button>
+        <b-button @click="input(4)" squared class="num-button" variant="secondary">4</b-button>
+        <b-button @click="input(5)" squared class="num-button" variant="secondary">5</b-button>
+        <b-button @click="input(6)" squared class="num-button" variant="secondary">6</b-button>
+        <b-button @click="clear()" squared class="num-button" variant="secondary">清空</b-button>
+        <b-button @click="input(7)" squared class="num-button" variant="secondary">7</b-button>
+        <b-button @click="input(8)" squared class="num-button" variant="secondary">8</b-button>
+        <b-button @click="input(9)" squared class="num-button" variant="secondary">9</b-button>
+        <b-button @click="pushmoney()" squared class="num-button-ok" variant="secondary">OK</b-button>
+        <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
+        <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
       </div>
     </div>
-    <div>
-      <b-button @click="input(1)" squared class="num-button" variant="secondary">1</b-button>
-      <b-button @click="input(2)" squared class="num-button" variant="secondary">2</b-button>
-      <b-button @click="input(3)" squared class="num-button" variant="secondary">3</b-button>
-      <b-button @click="del()" squared class="num-button" variant="secondary">删除</b-button>
-      <b-button @click="input(4)" squared class="num-button" variant="secondary">4</b-button>
-      <b-button @click="input(5)" squared class="num-button" variant="secondary">5</b-button>
-      <b-button @click="input(6)" squared class="num-button" variant="secondary">6</b-button>
-      <b-button @click="clear()" squared class="num-button" variant="secondary">清空</b-button>
-      <b-button @click="input(7)" squared class="num-button" variant="secondary">7</b-button>
-      <b-button @click="input(8)" squared class="num-button" variant="secondary">8</b-button>
-      <b-button @click="input(9)" squared class="num-button" variant="secondary">9</b-button>
-      <b-button @click="pushmoney()" squared class="num-button-ok" variant="secondary">OK</b-button>
-      <b-button @click="input(0)" squared class="num-button-zero" variant="secondary">0</b-button>
-      <b-button @click="add_point()" squared class="num-button" variant="secondary">.</b-button>
-    </div>
-    <b-nav justified class="bg-light">
+    <b-nav justified class="bg-light fixed-bottom">
       <b-nav-item>
         <b-icon icon="plus-circle-fill"></b-icon>
         <br />
@@ -86,7 +94,7 @@ export default {
       dismissCountDown: 0
     };
   },
-  
+
   mounted() {
     var tags = localStorage.getItem("tags");
     var list = null;
@@ -108,8 +116,8 @@ export default {
       };
     }
     this.list = list;
-    
-    window.scrollTo(0,400)
+
+    window.scrollTo(0, 400);
   },
 
   methods: {
@@ -169,7 +177,7 @@ export default {
       var listlength = this.list.length;
       for (var j = 0; j < listlength; j++) {
         this.list[j].isactive = true;
-        this.list[j].isactive2 = false
+        this.list[j].isactive2 = false;
       }
 
       // 读取数据并转换成json格式
@@ -258,6 +266,7 @@ export default {
   left: 0;
   z-index: 1030; */
   /* overflow-y: scroll; */
+  padding-bottom: 60px;
   padding-top: 100px;
 }
 
