@@ -9,7 +9,7 @@
       @dismiss-count-down="countDownChanged"
     >记账成功</b-alert>
 
-    <div style="overflow-y:scroll;height:200px;padding-top:3px;">
+    <div style="overflow-y:scroll;">
       <ul v-for="(item, index) of list" :key="index" class="ulstyle">
         <li
           @click="everytag(item)"
