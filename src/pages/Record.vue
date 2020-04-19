@@ -267,7 +267,8 @@ export default {
   z-index: 1030; */
   /* overflow-y: scroll; */
   padding-bottom: 60px;
-  padding-top: 100px;
+  padding-top: 215px;
+
 }
 
 .num-button {
