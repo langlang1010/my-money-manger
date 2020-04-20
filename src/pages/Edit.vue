@@ -35,9 +35,21 @@ export default {
      // alert(this.editmessage)
       var key = this.$route.query.id;
       var message = JSON.parse(localStorage.getItem("tags"));
+      var length=message.length
+      var flag=true
+      for(var i=0;i<length;i++){
+         if(this.editmessage===message[i])
+         {
+           alert('您输入的标签已存在')
+           flag=false
+           break
+         }
+      }
+      if(flag===true){
        message.splice(key, 1,this.editmessage);
        window.localStorage.setItem('tags',JSON.stringify(message));
        alert("添加"+this.editmessage+"成功");
+      }
         this.$router.push({path:'/tag'});
 
     }

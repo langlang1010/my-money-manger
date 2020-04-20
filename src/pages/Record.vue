@@ -168,7 +168,7 @@ export default {
       var result = this.input_num.substr(pointlast + 1, length);
       var plength = result.length;
       if (plength > 2 && pointlast !== -1) {
-        alert("输入金额不对");
+        alert("请输入正确金额");
         this.input_num = "0";
         return;
       } else {

@@ -49,7 +49,16 @@ export default {
     },
     click() {
       var message = prompt("请输入标签");
-      if (message) {
+      var length=this.list.length;
+      var flag=true
+      for(var i=0;i<length;i++){
+        if(message===this.list[i])
+        {alert('您输入的标签已经存在')
+          flag=false
+          break
+        }
+      }
+      if (message&&flag===true) {
         this.list.push(message);
         window.localStorage.setItem("tags", JSON.stringify(this.list));
         // 滑轮滑到底部
