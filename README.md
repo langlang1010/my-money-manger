@@ -13,3 +13,5 @@ cnpm install
 # 本地运行  
 npm run serve
 ```
+### 浏览地址  
+https://langlang1010.github.io/money/#/
