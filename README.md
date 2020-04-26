@@ -14,5 +14,4 @@ cnpm install
 # 本地运行  
 npm run serve
 ```
-### 浏览地址  
 
