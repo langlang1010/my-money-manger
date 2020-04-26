@@ -1,5 +1,6 @@
 ## 理财小助手
-欢迎来到理财小助手进行理财
+## 欢迎来到理财小助手浏览地址  
+https://langlang1010.github.io/money/#/
 ---  
 ### 环境说明
 * vue.js v2.6.11  
@@ -14,4 +15,4 @@ cnpm install
 npm run serve
 ```
 ### 浏览地址  
-https://langlang1010.github.io/money/#/
+
